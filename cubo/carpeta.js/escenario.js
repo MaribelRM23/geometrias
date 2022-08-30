@@ -21,9 +21,19 @@ document.body.appendChild( renderer.domElement );
 //geometria
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0xDA24EC} );
-const cube = new THREE.Mesh( geometry, material );
+const edges = new THREE.EdgesGeometry( geometry );
+const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x380054 } ) );
+scene.add( line );
+const material = new THREE.LineDashedMaterial( {
+	color: 0xffffff,
+	linewidth: 1,
+	scale: 1,
+	dashSize: 3,
+	gapSize: 1,
+} );
+const cube = new THREE.Line( geometry, material );
 scene.add( cube );
+
 
 camera.position.z = 5;
 
@@ -32,6 +42,10 @@ function animate() {
 	requestAnimationFrame( animate );
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
+    cube.rotation.z += 0.01;
+    line.rotation.x += 0.01;
+    line.rotation.y += 0.01;
+    line.rotation.z += 0.01;
 	renderer.render( scene, camera );
 }
 animate();

@@ -16,7 +16,10 @@ document.body.appendChild( renderer.domElement );
 //geometria
 
 const geometry = new THREE.ConeGeometry( 0.5, 1.8, 30 );
-const material = new THREE.MeshBasicMaterial( {color: 0x007373} );
+const edges = new THREE.EdgesGeometry( geometry );
+const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x00EEF1 } ) );
+scene.add( line );
+const material = new THREE.MeshNormalMaterial( {color: 0xF10000} );
 const cone = new THREE.Mesh( geometry, material );
 scene.add( cone )
 
@@ -30,6 +33,9 @@ function animate() {
     cone.rotation.x += 0.01;
     cone.rotation.y += 0.01;
     cone.rotation.z += 0.1;
+    line.rotation.x += 0.01;
+    line.rotation.y += 0.01;
+    line.rotation.z += 0.1;
 	renderer.render( scene, camera );
 }
 animate();

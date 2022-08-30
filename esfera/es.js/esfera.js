@@ -1,7 +1,7 @@
 //escenario
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xD6D6D6);
-scene.fog = new THREE.Fog(0x000000, 0.2, 6);
+scene.background = new THREE.Color(0x000000);
+scene.fog = new THREE.Fog(0x3f7b9d);
 
 
 
@@ -16,7 +16,10 @@ document.body.appendChild( renderer.domElement );
 //geometria
 
 const geometry = new THREE.SphereGeometry( 1, 50, 30 );
-const material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF } );
+const edges = new THREE.EdgesGeometry( geometry );
+const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x006364 } ) );
+scene.add( line );
+const material = new THREE.MeshDepthMaterial( { color: 0xffffff } );
 const sphere = new THREE.Mesh( geometry, material );
 scene.add( sphere );
 
@@ -30,6 +33,9 @@ function animate() {
     sphere.rotation.x += 0.01;
     sphere.rotation.y += 0.01;
     sphere.rotation.z += 0.01;
+    line.rotation.x += 0.01;
+    line.rotation.y += 0.01;
+    line.rotation.z += 0.01;
 	renderer.render( scene, camera );
 }
 animate();
