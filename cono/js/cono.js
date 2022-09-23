@@ -69,20 +69,20 @@ camera.position.z = 5;
 
 
 
-/*var control = new THREE.OrbitControls(camera, renderer.domElement);
+/*var control = new THREE.OrbitControls( camera, renderer.domElement);
 control.minDistance = 3;
 control.maxDistance = 8;*/
 
-/*const control = new THREE.PointerLockControls( camera, renderer.domElement);
+const control = new THREE.PointerLockControls( camera, renderer.domElement);
 document.getElementById('button').onclick = () => { control.lock()
-};*/
+};
 
 cone.position.x = 2
 cone2.position.y = -2
 cone3.position.y= 2
 cone4.position.x = -2
 
-const controls = new THREE.DragControls( [cone, cone2, cone3, cone4 ], camera, renderer.domElement );
+//const controls = new THREE.DragControls( [cone, cone2, cone3, cone4 ], camera, renderer.domElement );
 
 //animacion
 function animate() {
