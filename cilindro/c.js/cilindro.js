@@ -1,11 +1,11 @@
 //escenario
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x5DD1D6);
-scene.fog = new THREE.Fog(0x76456c, 0.1, 8);
+//scene.fog = new THREE.Fog(0x76456c, 0.1, 8);
 
 var loader = new  THREE.TextureLoader();
 loader.load(
-    '../img/f.jpeg', function(texture){
+    './img/f.jpeg', function(texture){
      scene.background = texture;
     }
 );
@@ -21,24 +21,34 @@ document.body.appendChild( renderer.domElement );
 //geometria
 
 const geometry = new THREE.CylinderGeometry( 0.80, 0.80, 4, 15 );
-const edges = new THREE.EdgesGeometry( geometry );
-const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xA601A8 } ) );
-scene.add( line );
-const material = new THREE.MeshMatcapMaterial( {color: 0xffffff} );
+
+const textureLoader = new THREE.TextureLoader();
+const matcap = textureLoader.load('../text/6.jpg');
+
+const material = new THREE.MeshMatcapMaterial( );
+material.matcap = matcap;
+material.flatShading =  true;
+
 const cylinder = new THREE.Mesh( geometry, material );
 scene.add( cylinder );
+
+const edges = new THREE.EdgesGeometry( geometry );
+const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000 } ) );
+scene.add( line );
+
+
 
 camera.position.z = 5;
 
 //animacion
 function animate() {
 	requestAnimationFrame( animate );
-    cylinder.rotation.x += 0.01;
-    cylinder.rotation.y += 0.01;
-    cylinder.rotation.z += 0.1;
-    line.rotation.x += 0.01;
-    line.rotation.y += 0.01;
-    line.rotation.z += 0.1;
+    cylinder.rotation.x += 0.005;
+   // cylinder.rotation.y += 0.005;
+    cylinder.rotation.z += 0.005;
+    line.rotation.x += 0.005;
+  //  line.rotation.y += 0.005;
+    line.rotation.z += 0.005;
 	renderer.render( scene, camera );
 }
 animate();

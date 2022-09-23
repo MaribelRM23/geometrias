@@ -1,11 +1,11 @@
 //escenario
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x33D7FF); 
-scene.fog = new THREE.Fog(0x76456c, 3, 6);
+//scene.fog = new THREE.Fog(0x76456c, 3, 6);
 
 var loader = new  THREE.TextureLoader();
 loader.load(
-    '../imagenes/2.jpeg', function(texture){
+    './imagenes/2.jpeg', function(texture){
      scene.background = texture;
     }
 );
@@ -21,18 +21,21 @@ document.body.appendChild( renderer.domElement );
 //geometria
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const edges = new THREE.EdgesGeometry( geometry );
-const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x380054 } ) );
-scene.add( line );
-const material = new THREE.LineDashedMaterial( {
-	color: 0xffffff,
-	linewidth: 1,
-	scale: 1,
-	dashSize: 3,
-	gapSize: 1,
-} );
-const cube = new THREE.Line( geometry, material );
+
+const textureLoader = new THREE.TextureLoader();
+const matcap = textureLoader.load('../text/5.jpg');
+
+const material = new THREE.MeshMatcapMaterial( );
+material.matcap = matcap;
+material.flatShading =  true;
+
+const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
+
+const edges = new THREE.EdgesGeometry( geometry );
+const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x00024D } ) );
+scene.add( line );
+
 
 
 camera.position.z = 5;
